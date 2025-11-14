@@ -1,0 +1,29 @@
+{
+  "name": "cse341-project2",
+  "version": "1.0.0",
+  "description": "",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "swagger": "node ./swagger.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/AzureFirehawk/cse341-project2.git"
+  },
+  "author": "Madison Thomas",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/AzureFirehawk/cse341-project2/issues"
+  },
+  "homepage": "https://github.com/AzureFirehawk/cse341-project2#readme",
+  "dependencies": {
+    "dotenv": "^17.2.3",
+    "express": "^5.1.0",
+    "mongodb": "^7.0.0",
+    "swagger-ui-express": "^5.0.1"
+  },
+  "devDependencies": {
+    "swagger-autogen": "^2.23.7"
+  }
+}
