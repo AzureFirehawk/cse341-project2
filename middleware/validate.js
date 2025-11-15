@@ -42,20 +42,19 @@ const validateStar = () => {
             .isLength({ min: 1 }).withMessage('Please provide a valid name.'),
         body('distance')
             .trim()
-            .isNumeric()
+            .isNumeric().withMessage('Please provide a valid distance in LY.')
             .isLength({ min: 1 }).withMessage('Please provide a valid distance in LY.'),
+        body('radius')
+            .trim()
+            .isNumeric().withMessage('Please provide a valid radius (Solar Radius).')
+            .isLength({ min: 1 }).withMessage('Please provide a valid radius (Solar Radius).'),
         body('mass')
             .trim()
-            .isNumeric()
-            .isLength({ min: 1 }).withMessage('Please provide a valid mass (relative to the Sun).'),
-        body('luminosity')
+            .isNumeric().withMessage('Please provide a valid mass (Solar Mass).')
+            .isLength({ min: 1 }).withMessage('Please provide a valid mass (Solar Mass).'),
+        body('spectralClass')
             .trim()
-            .isNumeric()
-            .isLength({ min: 1 }).withMessage('Please provide a valid luminosity.'),
-        body('color')
-            .trim()
-            .isAlpha()
-            .isLength({ min: 1 }).withMessage('Please provide a valid color.')
+            .isLength({ min: 1 }).withMessage('Please provide a valid spectral class.')
     ]
 }
 

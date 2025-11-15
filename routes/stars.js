@@ -1,19 +1,23 @@
 const router = require('express').Router();
-const validate = require('../middleware/validate');
+const { validate, validateStar } = require('../middleware/validate');
 
-const starsController = require('../controllers/stars');
+const starsController = require('../controllers/starsController');
 
 router.get('/', starsController.getAll);
 
 router.get('/:id', starsController.getSingle);
 
-router.post(
-    '/',
-    validate.validateStar,
-    handleErrors(starsController.createStar)
+router.post('/',
+    validateStar(),
+    validate,
+    starsController.createStar
 );
 
-router.put('/:id', starsController.updateStar);
+router.put('/:id', 
+    validateStar(),
+    validate,
+    starsController.updateStar
+);
 
 router.delete('/:id', starsController.deleteStar);
 
