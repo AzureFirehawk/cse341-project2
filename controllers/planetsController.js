@@ -25,6 +25,7 @@ const getSingle = (req, res) => {
 const createPlanet = async (req, res) => {
     const planet = {
         name: req.body.name,
+        starName: req.body.starName,
         starDistance: req.body.starDistance,
         mass: req.body.mass,
         gravity: req.body.gravity,
@@ -44,6 +45,7 @@ const updatePlanet = async (req, res) => {
     const planetId = new ObjectId(req.params.id);
     const planet = {
         name: req.body.name,
+        starName: req.body.starName,
         starDistance: req.body.starDistance,
         mass: req.body.mass,
         gravity: req.body.gravity,
