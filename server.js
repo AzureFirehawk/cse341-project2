@@ -13,7 +13,9 @@ app.use(bodyParser.json());
 app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerDocument));
 app.use('/', require('./routes'));
 
-
+process.on('uncaughtException', (err, origin) => {
+    console.log(process.stderr.fd, `Caught exception: ${err}\n` + `Exception origin: ${origin}`);
+})
 
 mongodb.initDb((err, db) => {
     if (err) {
