@@ -1,26 +1,28 @@
 const mongodb = require('../db/connect');
 const ObjectId = require('mongodb').ObjectId;
 
-const getAll = (req, res) => {
-    mongodb.getDb().db().collection('planets').find().toArray((err, result) => {
-        if (err) {
-            res.status(400).json({ message: err });
-        }
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(result);
-    })
+const getAll = async (req, res) => {
+    try {
+        const stars = await mongodb.getDb().db().collection('planets').find().toArray();
+        res.status(200).json(stars);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
 };
 
-const getSingle = (req, res) => {
-    const userId = new ObjectId(req.params.id);
-    mongodb.getDb().db().collection('planets').find({ _id: userId }).toArray((err, planets) => {
-        if (err) {
-            res.status(400).json({ message: err });
+const getSingle = async (req, res) => {
+    try {
+        const id = new ObjectId(req.params.id);
+        const planet = await mongodb.getDb().db().collection('planets').findOne({ _id: id });
+        if (!planet) {
+            return res.status(404).json({ message: "Planet not found" });
         }
-        res.setHeader('Content-Type', 'application/json')
-        res.status(200).json(planets[0]);
-    });
+        res.status(200).json([planet]);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
 };
+
 
 const createPlanet = async (req, res) => {
     const planet = {

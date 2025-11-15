@@ -1,34 +1,36 @@
 const mongodb = require('../db/connect');
 const ObjectId = require('mongodb').ObjectId;
 
-const getAll = (req, res) => {
-    mongodb.getDb().db().collection('stars').find().toArray((err, stars) => {
-        if (err) {
-            res.status(400).json({ message: err });
-        }
-        res.setHeader('Content-Type', 'application/json');
+const getAll = async (req, res) => {
+    try {
+        const stars = await mongodb.getDb().db().collection('stars').find().toArray();
         res.status(200).json(stars);
-    });
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
 };
 
-const getSingle = (req, res) => {
-    const userId = new ObjectId(req.params.id);
-    mongodb.getDb().db().collection('stars').find({ _id: userId }).toArray((err, stars) => {
-        if (err) {
-            res.status(400).json({ message: err });
+const getSingle = async (req, res) => {
+    try {
+        const id = new ObjectId(req.params.id);
+        const star = await mongodb.getDb().db().collection('stars').findOne({ _id: id });
+        if (!star) {
+            return res.status(404).json({ message: "Star not found" });
         }
-        res.setHeader('Content-Type', 'application/json');
-        res.status(200).json(stars[0]);
-    });
+        res.status(200).json(star);
+    } catch (err) {
+        res.status(500).json({ message: err.message });
+    }
 };
+
 
 const createStar = async (req, res) => {
     const star = {
         name: req.body.name,
         distance: req.body.distance,
-        stellarMass: req.body.mass,
-        luminosity: req.body.luminosity,
-        color: req.body.color
+        radius: req.body.radius,
+        mass: req.body.mass,
+        spectralClass: req.body.spectralClass
     }
     const response = await mongodb.getDb().db().collection('stars').insertOne(star);
     if (response.acknowledged) {
@@ -43,9 +45,9 @@ const updateStar = async (req, res) => {
     const star = {
         name: req.body.name,
         distance: req.body.distance,
-        stellarMass: req.body.mass,
-        luminosity: req.body.luminosity,
-        color: req.body.color
+        radius: req.body.radius,
+        mass: req.body.mass,
+        spectralClass: req.body.spectralClass
     }
     const response = await mongodb.getDb().db().collection('stars').replaceOne({ _id: starId }, star);
     if (response.modifiedCount > 0) {
