@@ -8,16 +8,314 @@
   "host": "localhost:3000",
   "basePath": "/",
   "schemes": [
-    "https",
     "http"
   ],
   "paths": {
     "/": {
       "get": {
-        "description": "",
+        "description": "Hello World",
         "responses": {
           "200": {
             "description": "OK"
+          }
+        }
+      }
+    },
+    "/stars/": {
+      "get": {
+        "description": "Display all star data from the database",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "Add new star data to the database. Required Inputs: Name, Distance (ly), Radius (Solar Radius), Mass (Solar Mass), Spectral Class",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "distance": {
+                  "example": "any"
+                },
+                "radius": {
+                  "example": "any"
+                },
+                "mass": {
+                  "example": "any"
+                },
+                "spectralClass": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/stars/{id}": {
+      "get": {
+        "description": "Select a star from the database by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "Update a star from the database by ID. Required Inputs: Name, Distance (ly), Radius (Solar Radius), Mass (Solar Mass), Spectral Class",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "distance": {
+                  "example": "any"
+                },
+                "radius": {
+                  "example": "any"
+                },
+                "mass": {
+                  "example": "any"
+                },
+                "spectralClass": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "Remove a star from the database by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/planets/": {
+      "get": {
+        "description": "Display all planet data from the database",
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "post": {
+        "description": "Add new planet data to the database. Required Inputs: Name, Star Name, Star Distance (AU), Mass (Earth Mass), Gravity (Earth Gravity), Moons, Day (Earth Hours), Year (Earth Days)",
+        "parameters": [
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "starName": {
+                  "example": "any"
+                },
+                "starDistance": {
+                  "example": "any"
+                },
+                "mass": {
+                  "example": "any"
+                },
+                "gravity": {
+                  "example": "any"
+                },
+                "moons": {
+                  "example": "any"
+                },
+                "day": {
+                  "example": "any"
+                },
+                "year": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created"
+          },
+          "422": {
+            "description": "Unprocessable Entity"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      }
+    },
+    "/planets/{id}": {
+      "get": {
+        "description": "Select a planet from the database by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "put": {
+        "description": "Update a planet from the database by ID. Required Inputs: Name, Star Name, Star Distance (AU), Mass (Earth Mass), Gravity (Earth Gravity), Moons, Day (Earth Hours), Year (Earth Days)",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "schema": {
+              "type": "object",
+              "properties": {
+                "name": {
+                  "example": "any"
+                },
+                "starName": {
+                  "example": "any"
+                },
+                "starDistance": {
+                  "example": "any"
+                },
+                "mass": {
+                  "example": "any"
+                },
+                "gravity": {
+                  "example": "any"
+                },
+                "moons": {
+                  "example": "any"
+                },
+                "day": {
+                  "example": "any"
+                },
+                "year": {
+                  "example": "any"
+                }
+              }
+            }
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
+          }
+        }
+      },
+      "delete": {
+        "description": "Remove a planet from the database by ID",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "No Content"
+          },
+          "500": {
+            "description": "Internal Server Error"
           }
         }
       }
