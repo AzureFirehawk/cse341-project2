@@ -1,36 +1,61 @@
-const { check, validationResult } = require('express-validator');
+const { body, validationResult } = require('express-validator');
 
-const validateContact = () => {
+const validatePlanet = () => {
     return [
-        check('firstName')
+        body('name')
             .trim()
-            .escape()
+            .isLength({ min: 1 }).withMessage('Please provide a valid name.'),
+        body('starName')
+            .trim()
+            .isLength({ min: 1 }).withMessage('Please provide a valid star name.'),
+        body('starDistance')
+            .trim()
+            .isNumeric()
+            .isLength({ min: 1 }).withMessage('Please provide a valid distance in AU.'),
+        body('mass')
+            .trim()
+            .isNumeric()
+            .isLength({ min: 1 }).withMessage('Please provide a valid mass in kg.'),
+        body('gravity')
+            .trim()
+            .isNumeric()
+            .isLength({ min: 1 }).withMessage('Please provide a valid gravity (g).'),
+        body('moons')
+            .trim()
+            .isNumeric()
+            .isLength({ min: 1 }).withMessage('Please provide a valid number of moons.'),
+        body('day')
+            .trim()
+            .isNumeric()
+            .isLength({ min: 1 }).withMessage('Please provide a valid day length (relative to Earth).'),
+        body('year')
+            .trim()
+            .isNumeric()
+            .isLength({ min: 1 }).withMessage('Please provide a valid year length (relative to Earth.')
+    ]
+}
+
+const validateStar = () => {
+    return [
+        body('name')
+            .trim()
+            .isLength({ min: 1 }).withMessage('Please provide a valid name.'),
+        body('distance')
+            .trim()
+            .isNumeric()
+            .isLength({ min: 1 }).withMessage('Please provide a valid distance in LY.'),
+        body('mass')
+            .trim()
+            .isNumeric()
+            .isLength({ min: 1 }).withMessage('Please provide a valid mass (relative to the Sun).'),
+        body('luminosity')
+            .trim()
+            .isNumeric()
+            .isLength({ min: 1 }).withMessage('Please provide a valid luminosity.'),
+        body('color')
+            .trim()
             .isAlpha()
-            .isLength({ min: 1 })
-            .withMessage('Please provide a valid first name.'),
-        check('lastName')
-            .trim()
-            .escape()
-            .isAlpha()
-            .isLength({ min: 1 })
-            .withMessage('Please provide a valid last name.'),
-        check('favoriteColor')
-            .trim()
-            .escape()
-            .isAlpha()
-            .isLength({ min: 1 })
-            .withMessage('Please provide a valid favorite color.'),
-        check('email')
-            .trim()
-            .isEmail()
-            .normalizeEmail()
-            .withMessage('Please provide a valid email address.'),
-        check('birthday')
-            .trim()
-            .escape()
-            .format('YYYY-MM-DD')
-            .isLength({ min: 1 })
-            .withMessage('Please provide a valid birthday.')
+            .isLength({ min: 1 }).withMessage('Please provide a valid color.')
     ]
 }
 
@@ -47,4 +72,4 @@ const validate = (req, res, next) => {
     });
 }
 
-module.exports = { validateContact, validate }
+module.exports = { validatePlanet, validateStar, validate }
