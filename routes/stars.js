@@ -9,7 +9,7 @@ router.get('/:id', starsController.getSingle);
 
 router.post(
     '/',
-    validate.validatePost,
+    validate.validateStar,
     handleErrors(starsController.createStar)
 );
 
