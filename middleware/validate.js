@@ -15,11 +15,11 @@ const validatePlanet = () => {
         body('mass')
             .trim()
             .isNumeric()
-            .isLength({ min: 1 }).withMessage('Please provide a valid mass in kg.'),
+            .isLength({ min: 1 }).withMessage('Please provide a valid mass (relative to Earth).'),
         body('gravity')
             .trim()
             .isNumeric()
-            .isLength({ min: 1 }).withMessage('Please provide a valid gravity (g).'),
+            .isLength({ min: 1 }).withMessage('Please provide a valid gravity (relative to Earth).'),
         body('moons')
             .trim()
             .isNumeric()
