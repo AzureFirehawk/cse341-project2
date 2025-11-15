@@ -176,7 +176,7 @@
         }
       },
       "post": {
-        "description": "Add new planet data to the database. Required Inputs: Name, Star Name, Star Distance (AU), Mass (Earth Mass), Gravity (Earth Gravity), Moons, Day (Earth Hours), Year (Earth Days)",
+        "description": "Add new planet data to the database. Required Inputs: Name, Star Name, Star Distance (AU), Mass (Earth Mass), Gravity (Earth Gravity), Moons, Day (Earth Days), Year (Earth Years)",
         "parameters": [
           {
             "name": "body",
@@ -249,7 +249,7 @@
         }
       },
       "put": {
-        "description": "Update a planet from the database by ID. Required Inputs: Name, Star Name, Star Distance (AU), Mass (Earth Mass), Gravity (Earth Gravity), Moons, Day (Earth Hours), Year (Earth Days)",
+        "description": "Update a planet from the database by ID. Required Inputs: Name, Star Name, Star Distance (AU), Mass (Earth Mass), Gravity (Earth Gravity), Moons, Day (Earth Days), Year (Earth Years)",
         "parameters": [
           {
             "name": "id",
