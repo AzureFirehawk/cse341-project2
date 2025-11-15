@@ -10,11 +10,11 @@ router.get('/:id', starsController.getSingle);
 router.post(
     '/',
     validate.validatePost,
-    handleErros(starsController.createPost)
+    handleErrors(starsController.createStar)
 );
 
-router.put('/:id', starsController.updatePost);
+router.put('/:id', starsController.updateStar);
 
-router.delete('/:id', starsController.deletePost);
+router.delete('/:id', starsController.deleteStar);
 
 module.exports = router;

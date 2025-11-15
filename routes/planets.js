@@ -9,12 +9,12 @@ router.get('/:id', planetsController.getSingle);
 
 router.post(
     '/',
-    validate.validatePost,
-    handleErros(planetsController.createPost)
+    validate.validatePlanet,
+    handleErrors(planetsController.createPlanet)
 );
 
-router.put('/:id', planetsController.updatePost);
+router.put('/:id', planetsController.updatePlanet);
 
-router.delete('/:id', planetsController.deletePost);
+router.delete('/:id', planetsController.deletePlanet);
 
 module.exports = router;
