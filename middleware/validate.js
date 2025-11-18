@@ -10,27 +10,27 @@ const validatePlanet = () => {
             .isLength({ min: 1 }).withMessage('Please provide a valid star name.'),
         body('starDistance')
             .trim()
-            .isNumeric()
+            .isNumeric().withMessage('Please provide a valid distance in AU.')
             .isLength({ min: 1 }).withMessage('Please provide a valid distance in AU.'),
         body('mass')
             .trim()
-            .isNumeric()
+            .isNumeric().withMessage('Please provide a valid mass (relative to Earth).')
             .isLength({ min: 1 }).withMessage('Please provide a valid mass (relative to Earth).'),
         body('gravity')
             .trim()
-            .isNumeric()
+            .isNumeric().withMessage('Please provide a valid gravity (relative to Earth).')
             .isLength({ min: 1 }).withMessage('Please provide a valid gravity (relative to Earth).'),
         body('moons')
             .trim()
-            .isNumeric()
+            .isNumeric().withMessage('Please provide a valid number of moons.')
             .isLength({ min: 1 }).withMessage('Please provide a valid number of moons.'),
         body('day')
             .trim()
-            .isNumeric()
+            .isNumeric().withMessage('Please provide a valid day length (relative to Earth).')
             .isLength({ min: 1 }).withMessage('Please provide a valid day length (relative to Earth).'),
         body('year')
             .trim()
-            .isNumeric()
+            .isNumeric().withMessage('Please provide a valid year length (relative to Earth.)')
             .isLength({ min: 1 }).withMessage('Please provide a valid year length (relative to Earth.')
     ]
 }
