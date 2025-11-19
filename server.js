@@ -24,7 +24,8 @@ app.use((err, req, res, next) => {
     res.send({
         error: {
             status: err.status || 500,
-            message: err.message
+            message: err.message,
+            data: err.data || null
         }
     });
 })
