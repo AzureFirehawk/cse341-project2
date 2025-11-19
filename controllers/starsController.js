@@ -12,16 +12,19 @@ const getAll = async (req, res, next) => {
 };
 
 const getSingle = async (req, res, next) => {
-    const id = new ObjectId(req.params.id);
     try {
+        let id;
+        try{
+            id = new ObjectId(req.params.id);
+        } catch (err) {
+            return next(createError(400, 'Invalid Star ID'));
+        }
         const star = await mongodb.getDb().db().collection('stars').findOne({ _id: id });
         if (!star) {
             throw createError(404, 'Star not found');
         }
         res.status(200).json(star);
     } catch (err) {
-        console.log(err.message);
-        
         next(err);
     }
 };

@@ -1,30 +1,36 @@
 const mongodb = require('../db/connect');
+const createError = require('http-errors');
 const ObjectId = require('mongodb').ObjectId;
 
-const getAll = async (req, res) => {
+const getAll = async (req, res, next) => {
     try {
         const stars = await mongodb.getDb().db().collection('planets').find().toArray();
         res.status(200).json(stars);
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        next(err);
     }
 };
 
-const getSingle = async (req, res) => {
+const getSingle = async (req, res, next) => {
     try {
-        const id = new ObjectId(req.params.id);
+        let id;
+        try {
+            id = new ObjectId(req.params.id);
+        } catch (err) {
+            return next(createError(400, 'Invalid Planet ID'));
+        }
         const planet = await mongodb.getDb().db().collection('planets').findOne({ _id: id });
         if (!planet) {
             return res.status(404).json({ message: "Planet not found" });
         }
         res.status(200).json([planet]);
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        next(err);
     }
 };
 
 
-const createPlanet = async (req, res) => {
+const createPlanet = async (req, res, next) => {
     try {
         const planet = {
             name: req.body.name,
@@ -47,7 +53,7 @@ const createPlanet = async (req, res) => {
     }
 }
 
-const updatePlanet = async (req, res) => {
+const updatePlanet = async (req, res, next) => {
     try {
         const planetId = new ObjectId(req.params.id);
         const planet = {
