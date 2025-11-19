@@ -37,37 +37,45 @@ const createStar = async (req, res) => {
         if (response.acknowledged) {
             res.status(201).json(response);
         } else {
-            res.status(500).json(response.error || 'Some error occurred while creating the entry.');
+            throw new Error('Some error occurred while creating the entry.');
         }
     } catch (err) {
-        res.status(500).json({ message: err.message });
+        next(err);
     }
 };
 
 const updateStar = async (req, res) => {
-    const starId = new ObjectId(req.params.id);
-    const star = {
-        name: req.body.name,
-        distance: req.body.distance,
-        radius: req.body.radius,
-        mass: req.body.mass,
-        spectralClass: req.body.spectralClass
-    }
-    const response = await mongodb.getDb().db().collection('stars').replaceOne({ _id: starId }, star);
-    if (response.modifiedCount > 0) {
-        res.status(204).send();
-    } else {
-        res.status(500).json(response.error || 'Some error occurred while updating the entry.');
+    try {
+        const starId = new ObjectId(req.params.id);
+        const star = {
+            name: req.body.name,
+            distance: req.body.distance,
+            radius: req.body.radius,
+            mass: req.body.mass,
+            spectralClass: req.body.spectralClass
+        }
+        const response = await mongodb.getDb().db().collection('stars').replaceOne({ _id: starId }, star);
+        if (response.modifiedCount > 0) {
+            res.status(204).send();
+        } else {
+            throw new Error('Some error occurred while updating the entry.');
+        }
+    } catch (err) {
+        next(err);
     }
 };
 
 const deleteStar = async (req, res) => {
-    const starId = new ObjectId(req.params.id);
-    const response = await mongodb.getDb().db().collection('stars').deleteOne({ _id: starId });
-    if (response.deletedCount > 0) {
-        res.status(204).send();
-    } else {
-        res.status(500).json(response.error || 'Some error occurred while deleting the entry.');
+    try {
+        const starId = new ObjectId(req.params.id);
+        const response = await mongodb.getDb().db().collection('stars').deleteOne({ _id: starId });
+        if (response.deletedCount > 0) {
+            res.status(204).send();
+        } else {
+           throw new Error('Some error occurred while deleting the entry.');
+        }    
+    } catch (err) {
+        next(err);
     }
 };
 
