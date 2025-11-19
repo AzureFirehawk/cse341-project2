@@ -5,7 +5,10 @@ GET http://localhost:3000/stars
 GET http://localhost:3000/wrong
 
 ### Get one star
-GET http://localhost:3000/stars/6918c6405e085860122937f5
+GET http://localhost:3000/stars/691df1cce0420b49f8de814f
+
+### invalid star ID
+GET http://localhost:3000/stars/invalid
 
 ### Add new star
 POST http://localhost:3000/stars 
@@ -14,13 +17,13 @@ content-type: application/json
 {
     "name": "any",
     "distance": "131",
-    "radius": "2d2",
+    "radius": "22",
     "mass": "22",
     "spectralClass": "any"
 }
 
 ### Update star
-PUT http://localhost:3000/stars/691ce096146380f7ff47f619
+PUT http://localhost:3000/stars/691df1cce0420b49f8de814f
 content-type: application/json
 
 {
@@ -32,4 +35,31 @@ content-type: application/json
 }
 
 ### Delete star
-DELETE http://localhost:3000/stars/691ce096146380f7ff47f619
+DELETE http://localhost:3000/stars/691df1cce0420b49f8de814f
+
+
+### Planets
+
+### Get all
+GET http://localhost:3000/planets
+
+### Get one
+GET http://localhost:3000/planets/6918d8a51062c31f1bb7c05f
+
+### invalid planet ID
+GET http://localhost:3000/planets/invalid
+
+### Add new planet
+POST http://localhost:3000/planets 
+content-type: application/json
+
+{
+    "name": "any",
+    "starName": "any",
+    "starDistance": "any",
+    "mass": "any",
+    "gravity": "any",
+    "moons": "any",
+    "day": "any",
+    "year": "any"
+}
