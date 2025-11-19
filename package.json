@@ -23,6 +23,7 @@
     "express-validator": "^7.3.0",
     "http-errors": "^2.0.0",
     "mongodb": "^7.0.0",
+    "mongoose": "^8.20.0",
     "swagger-ui-express": "^5.0.1"
   },
   "devDependencies": {
