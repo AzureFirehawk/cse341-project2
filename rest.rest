@@ -14,7 +14,7 @@ content-type: application/json
 {
     "name": "any",
     "distance": "131",
-    "radius": "22",
+    "radius": "2d2",
     "mass": "22",
     "spectralClass": "any"
 }

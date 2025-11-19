@@ -1,4 +1,5 @@
 const mongodb = require('../db/connect');
+const createError = require('http-errors');
 const ObjectId = require('mongodb').ObjectId;
 
 const getAll = async (req, res, next) => {
@@ -11,14 +12,16 @@ const getAll = async (req, res, next) => {
 };
 
 const getSingle = async (req, res, next) => {
+    const id = new ObjectId(req.params.id);
     try {
-        const id = new ObjectId(req.params.id);
         const star = await mongodb.getDb().db().collection('stars').findOne({ _id: id });
         if (!star) {
-            return res.status(404).json({ message: "Star not found" });
+            throw createError(404, 'Star not found');
         }
         res.status(200).json(star);
     } catch (err) {
+        console.log(err.message);
+        
         next(err);
     }
 };
