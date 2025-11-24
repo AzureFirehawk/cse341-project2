@@ -5,4 +5,4 @@ const isAuth = (req, res, next) => {
     next();
 };
 
-module.exports = isAuth;
+module.exports = { isAuth };
