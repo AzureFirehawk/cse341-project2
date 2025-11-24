@@ -1,4 +1,3 @@
-const { check } = require('express-validator');
 const mongodb = require('../db/connect');
 const createError = require('http-errors');
 const bcrypt = require('bcrypt');
