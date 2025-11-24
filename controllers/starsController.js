@@ -50,7 +50,7 @@ const createStar = async (req, res) => {
     }
 };
 
-const updateStar = async (req, res) => {
+const updateStar = async (req, res, next) => {
     try {
         const starId = new ObjectId(req.params.id);
         const star = {
