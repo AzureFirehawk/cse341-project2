@@ -1,11 +1,11 @@
 const router = require('express').Router();
+const { isAuth } = require('../middleware/authenticate');
 const accountsController = require('../controllers/accountsController');
-const auth = require('../middleware/authenticate');
 
-router.get('/' , accountsController.getAll);
+router.get('/', accountsController.getAll);
 router.get('/:id', accountsController.getSingle);
-router.post('/', auth.isAuth, accountsController.createAccount);
-router.put('/:id', auth.isAuth, accountsController.updateAccount);
-router.delete('/:id', auth.isAuth, accountsController.deleteAccount);
+router.post('/', isAuth, accountsController.createAccount);
+router.put('/:id', isAuth, accountsController.updateAccount);
+router.delete('/:id', isAuth, accountsController.deleteAccount);
 
 module.exports = router;
